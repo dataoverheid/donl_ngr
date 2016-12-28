@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<container xmlns="http://symfony.com/schema/dic/services"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="http://symfony.com/schema/dic/services
+		http://symfony.com/schema/dic/services/services-1.0.xsd"
+	>
+	<parameters>
+
+		<!-- Connectors -->
+		<parameter key="ngr.connector.ngr.class">Jcid\Ngr\Connector\Ngr</parameter>
+		<parameter key="ngr.connector.ckan.class">Jcid\Ngr\Connector\Ckan</parameter>
+
+		<!-- Cache -->
+		<parameter key="ngr.cache.class">Jcid\Ngr\Cache\Cache</parameter>
+
+		<!-- Transformers -->
+		<parameter key="ngr.transformer.ckantojsontransformer.class">Jcid\Ngr\Transformer\CkanToJsonTransformer</parameter>
+		<parameter key="ngr.transformer.ngrtockantransformer.class">Jcid\Ngr\Transformer\NgrToCkanTransformer</parameter>
+
+	</parameters>
+
+	<services>
+
+		<!-- Console placeholders -->
+		<service id="console.input" synthetic="true" />
+		<service id="console.output" synthetic="true" />
+
+		<!-- Connectors -->
+		<service id="ngr.connector.ngr" class="%ngr.connector.ngr.class%">
+			<argument type="service" id="console.output" />
+			<argument type="service" id="ngr.transformer.ngrtockantransformer" />
+			<argument>%config.ngr%</argument>
+		</service>
+		<service id="ngr.connector.ckan" class="%ngr.connector.ckan.class%">
+			<argument type="service" id="console.output" />
+			<argument type="service" id="ngr.cache" />
+			<argument type="service" id="ngr.transformer.ckantojsontransformer" />
+			<argument>%config.ckan%</argument>
+		</service>
+
+		<!-- Cache -->
+		<service id="ngr.cache" class="%ngr.cache.class%">
+			<argument>%dir.base%/cache</argument>
+		</service>
+
+		<!-- Transformers -->
+		<service id="ngr.transformer.ckantojsontransformer" class="%ngr.transformer.ckantojsontransformer.class%" />
+		<service id="ngr.transformer.ngrtockantransformer" class="%ngr.transformer.ngrtockantransformer.class%" />
+
+	</services>
+</container>

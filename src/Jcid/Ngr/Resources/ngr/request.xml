@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<csw:GetRecords
+		xmlns:csw="http://www.opengis.net/cat/csw/2.0.2"
+		xmlns:gmd="http://www.isotc211.org/2005/gmd"
+		service="CSW"
+		version="2.0.2"
+		outputFormat="application/xml"
+		outputSchema="http://www.isotc211.org/2005/gmd"
+		resultType="results"
+		startPosition="%d"
+		maxRecords="%d"
+		>
+	<csw:Query typeNames="csw:Record">
+		<csw:ElementSetName>full</csw:ElementSetName>
+		<csw:Constraint version="1.1.0">
+			<ogc:Filter xmlns:ogc="http://www.opengis.net/ogc">
+				<ogc:And>
+					<ogc:Or>
+						<ogc:PropertyIsLike wildcard="*" singleChar="." escapeChar="!">
+							<ogc:PropertyName>OtherConstraints</ogc:PropertyName>
+							<ogc:Literal>*http://creativecommons.org/publicdomain/mark/1.0/deed.nl*</ogc:Literal>
+						</ogc:PropertyIsLike>
+						<ogc:PropertyIsLike wildcard="*" singleChar="." escapeChar="!">
+							<ogc:PropertyName>OtherConstraints</ogc:PropertyName>
+							<ogc:Literal>*http://creativecommons.org/publicdomain/zero/1.0/*</ogc:Literal>
+						</ogc:PropertyIsLike>
+						<ogc:PropertyIsLike wildcard="*" singleChar="." escapeChar="!">
+							<ogc:PropertyName>OtherConstraints</ogc:PropertyName>
+							<ogc:Literal>*http://creativecommons.org/licenses/by/*</ogc:Literal>
+						</ogc:PropertyIsLike>
+					</ogc:Or>
+					<ogc:PropertyIsLike wildcard="*" singleChar="." escapeChar="!">
+						<ogc:PropertyName>Type</ogc:PropertyName>
+						<ogc:Literal>*dataset*</ogc:Literal>
+					</ogc:PropertyIsLike>
+				</ogc:And>
+			</ogc:Filter>
+		</csw:Constraint>
+	</csw:Query>
+</csw:GetRecords>
