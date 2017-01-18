@@ -1,0 +1,14 @@
+{
+	"ckan": {
+		"base_url": "http://<your ckan url>",
+		"defaults": {
+			"headers": {
+				"Content-type": "application/json",
+				"Authorization": "<authorization key>"
+			}
+		}
+	},
+	"ngr": {
+		"base_url": "http://nationaalgeoregister.nl/"
+	}
+}
